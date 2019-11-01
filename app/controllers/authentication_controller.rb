@@ -10,6 +10,14 @@ class AuthenticationController < ApplicationController
         end
     end
 
+    def validate
+        if @current_user
+            render json: { token: issue_token({user_id: @current_user.id}), user: UserSerializer.new(@current_user)}
+        else
+            render json: { errors: ["user not found"] }, status: :not_found
+        end
+    end
+
     private
 
     def serialize(user_data)
