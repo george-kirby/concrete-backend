@@ -11,17 +11,21 @@ class TasksController < ApplicationController
     end
 
     def create
-        task = Task.new(task_params)
+        task = Task.create(task_params)
         if task.valid?
-            task.save
             render json: serialize(task)
+        else
+            render json: task.errors.full_messages
         end
     end
 
     def update
         task = Task.find(params[:id])
-        task.update(task_params)
-        render json: serialize(task)
+        if task.update(task_params)
+            render json: serialize(task)
+        else
+            render json: task.errors.full_messages
+        end
     end
 
     def destroy

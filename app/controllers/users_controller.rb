@@ -21,8 +21,11 @@ class UsersController < ApplicationController
 
     def update
         user = User.find(params[:id])
-        user.update(user_params)
-        render json: user
+        if user.update(user_params)
+            render json: serialize(user)
+        else
+            render json: user.errors.full_messages
+        end
     end
 
     # def destroy

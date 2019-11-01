@@ -10,17 +10,21 @@ class StepsController < ApplicationController
     end
 
     def create
-        step = Step.new(step_params)
+        step = Step.create(step_params)
         if step.valid?
-            step.save
             render json: serialize(step)
+        else
+            render json: step.errors.full_messages
         end
     end
 
     def update
         step = Step.find(params[:id])
-        step.update(step_params)
-        render json: serialize(step)
+        if step.update(step_params)
+            render json: serialize(step)
+        else
+            render json: step.errors.full_messages
+        end
     end
 
     def destroy

@@ -11,20 +11,21 @@ class ProjectsController < ApplicationController
     end
 
     def create
-        project = Project.new(project_params)
-        byebug
+        project = Project.create(project_params)
         if project.valid?
-            project.save
             render json: serialize(project)
-        # else
-        #     render project.errors.full_messages # incorrect syntax
+        else
+            render json: project.errors.full_messages
         end
     end
 
     def update
         project = Project.find(params[:id])
-        project.update(project_params)
-        render json: serialize(project)
+        if project.update(project_params)
+            render json: serialize(project)
+        else
+            render json: project.errors.full_messages
+        end
     end
 
     def destroy
