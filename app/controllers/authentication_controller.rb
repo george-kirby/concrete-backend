@@ -1,6 +1,7 @@
 class AuthenticationController < ApplicationController
 
     def create
+        # byebug
         user = User.find_by(email: login_params[:email])
         if user && user.authenticate(login_params[:password])
             render json: { token: issue_token({user_id: user.id}), user: serialize(user)}
