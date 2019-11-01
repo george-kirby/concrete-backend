@@ -32,7 +32,9 @@ class UsersController < ApplicationController
     private
 
     def serialize(user_data)
-        user_data.to_json(:include => {
+        user_data.to_json(
+            :except => [:password_digest],
+            :include => {
             :projects => {
                 :except => [:created_at, :updated_at, :id, :user_id],
                 :include => [:tasks => {
@@ -44,6 +46,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.require(:user).permit(:email, :password)
+        params.require(:user).permit(:email, :password, :password_confirmation)
     end
 end
