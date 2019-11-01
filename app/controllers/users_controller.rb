@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        # byebug
         user = User.find(params[:id])
         render json: serialize(user)
     end
@@ -13,7 +14,7 @@ class UsersController < ApplicationController
     def create
         user = User.create(user_params)
         if user.valid?
-            render json: serialize(user)
+            render json: { token: issue_token({user_id: user.id}), user: serialize(user) }
         else
             render json: user.errors.full_messages
         end
