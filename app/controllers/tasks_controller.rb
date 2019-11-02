@@ -13,6 +13,11 @@ class TasksController < ApplicationController
     def create
         task = Task.create(task_params)
         if task.valid?
+            byebug
+            same_time_tasks = Task.all.filter{|t| (t.actual_time == task.actual_time) && (t != task)}.sort_by{|task| task.position_at_time}
+            if !same_time_tasks.empty?
+                task.update(position_at_time: same_time_tasks.last.position_at_time + 1)
+            end
             render json: serialize(task)
         else
             render json: task.errors.full_messages
