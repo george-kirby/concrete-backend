@@ -38,7 +38,11 @@ class TasksController < ApplicationController
     def serialize(task_data)
         task_data.to_json(
             :except => [:created_at, :updated_at],
-            :include => {:steps => {:except => [:created_at, :updated_at]}})
+            :include => {
+                :project => {:except => [:created_at, :updated_at]}, 
+                :steps => {:except => [:created_at, :updated_at]}
+            }
+        )
     end
 
     def task_params
