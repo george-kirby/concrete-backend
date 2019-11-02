@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     end
 
     def show
-        # byebug
         user = User.find(params[:id])
         render json: serialize(user)
     end
