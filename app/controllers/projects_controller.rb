@@ -38,9 +38,9 @@ class ProjectsController < ApplicationController
     def serialize(project_data)
         project_data.to_json(:include => {
             :tasks => {
-                :except => [:created_at, :updated_at, :id, :project_id],
+                :except => [:created_at, :updated_at, :project_id],
                 :include => [:project => {:except => [:created_at, :updated_at]}, 
-                    :steps => {:except => [:created_at, :updated_at, :id, :task_id]}]
+                    :steps => {:except => [:created_at, :updated_at, :task_id]}]
             }
         })
     end

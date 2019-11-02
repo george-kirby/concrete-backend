@@ -40,12 +40,12 @@ class UsersController < ApplicationController
             :except => [:password_digest],
             :include => {
             :projects => {
-                :except => [:created_at, :updated_at, :id, :user_id],
+                :except => [:created_at, :updated_at, :user_id],
                 :include => [:tasks => {
-                    :except => [:created_at, :updated_at, :id, :project_id],
+                    :except => [:created_at, :updated_at, :project_id],
                     :include => [
                         :project => {:except => [:created_at, :updated_at]}, 
-                        :steps => {:except => [:created_at, :updated_at, :id, :task_id]}]
+                        :steps => {:except => [:created_at, :updated_at, :task_id]}]
                 }]
             }
         })
