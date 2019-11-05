@@ -35,7 +35,17 @@ class StepsController < ApplicationController
     private
 
     def serialize(step_data)
-        step_data.to_json(:except => [:created_at, :updated_at])
+        step_data.to_json(
+            :except => [:created_at, :updated_at],
+            :include => {
+                :task => {
+                    :only => [:id],
+                    :include => {
+                        :project => {:only => [:id]}
+                    }
+                }
+            }
+        )
     end
 
     def step_params
