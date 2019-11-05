@@ -10,8 +10,10 @@ class StepsController < ApplicationController
     end
 
     def create
+        task = Task.find(step_params[:task_id])
         step = Step.create(step_params)
         if step.valid?
+            step.update(position: task.steps.length + 1)
             render json: serialize(step)
         else
             render json: step.errors.full_messages
@@ -49,6 +51,6 @@ class StepsController < ApplicationController
     end
 
     def step_params
-        params.require(:step).permit(:act, :task_id, :position, :completed)
+        params.require(:step).permit(:act, :task_id, :completed)
     end
 end
