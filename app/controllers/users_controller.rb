@@ -45,7 +45,18 @@ class UsersController < ApplicationController
                     :except => [:created_at, :updated_at, :project_id],
                     :include => [
                         :project => {:except => [:created_at, :updated_at]}, 
-                        :steps => {:except => [:created_at, :updated_at, :task_id]}]
+                        :steps => {
+                            :except => [:created_at, :updated_at],
+                            :include => {
+                                :task => {
+                                    :only => [:id],
+                                    :include => {
+                                        :project => {:only => [:id]}
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 }]
             }
         })
