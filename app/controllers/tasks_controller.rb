@@ -24,8 +24,10 @@ class TasksController < ApplicationController
     end
 
     def update
+        # byebug
         task = Task.find(params[:id])
-        if task.update(task_params)
+        task.update(task_params)
+        if task.valid?
             render json: serialize(task)
         else
             render json: task.errors.full_messages
@@ -44,6 +46,8 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:title, :project_id, :cue, :actual_time, :display_time, :position_at_time, :complete_steps, :incomplete_steps, :tags)
+        improved_task_params = params.require(:task).permit(:title, :project_id, :cue, :actual_time, :display_time, :position_at_time, :complete_steps, :incomplete_steps, :tags)
+        improved_task_params[:complete_steps] = JSON.parse(improved_task_params[:complete_steps])
+        improved_task_params
     end
 end
