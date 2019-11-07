@@ -10,28 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_01_100856) do
+ActiveRecord::Schema.define(version: 2019_10_30_132433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "projects", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
-  end
-
-  create_table "steps", force: :cascade do |t|
-    t.string "act"
-    t.integer "position", default: 1
-    t.boolean "completed", default: false
-    t.bigint "task_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_steps_on_task_id"
-  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
@@ -39,10 +21,12 @@ ActiveRecord::Schema.define(version: 2019_11_01_100856) do
     t.string "display_time"
     t.datetime "actual_time"
     t.integer "position_at_time", default: 1
-    t.bigint "project_id", null: false
+    t.string "tags", default: [], array: true
+    t.string "steps", default: [], array: true
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,7 +36,5 @@ ActiveRecord::Schema.define(version: 2019_11_01_100856) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "projects", "users"
-  add_foreign_key "steps", "tasks"
-  add_foreign_key "tasks", "projects"
+  add_foreign_key "tasks", "users"
 end
