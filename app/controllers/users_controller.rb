@@ -39,27 +39,9 @@ class UsersController < ApplicationController
         user_data.to_json(
             :except => [:password_digest],
             :include => {
-            :projects => {
-                :except => [:created_at, :updated_at, :user_id],
-                :include => [:tasks => {
-                    :except => [:created_at, :updated_at, :project_id],
-                    :include => [
-                        :project => {:except => [:created_at, :updated_at]}, 
-                        :steps => {
-                            :except => [:created_at, :updated_at],
-                            :include => {
-                                :task => {
-                                    :only => [:id],
-                                    :include => {
-                                        :project => {:only => [:id]}
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                }]
+                :tasks => {:except => [:created_at, :updated_at, :user_id]}
             }
-        })
+        )
     end
 
     def user_params
