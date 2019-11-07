@@ -40,26 +40,10 @@ class TasksController < ApplicationController
     private
 
     def serialize(task_data)
-        task_data.to_json(
-            :except => [:created_at, :updated_at],
-            :include => {
-                :project => {:except => [:created_at, :updated_at]}, 
-                :steps => {
-                    :except => [:created_at, :updated_at],
-                    :include => {
-                        :task => {
-                            :only => [:id],
-                            :include => {
-                                :project => {:only => [:id]}
-                            }
-                        }
-                    }
-                }
-            }
-        )
+        task_data.to_json(:except => [:created_at, :updated_at])
     end
 
     def task_params
-        params.require(:task).permit(:title, :project_id, :cue, :actual_time, :display_time, :position_at_time)
+        params.require(:task).permit(:title, :project_id, :cue, :actual_time, :display_time, :position_at_time, :steps, :tags)
     end
 end
