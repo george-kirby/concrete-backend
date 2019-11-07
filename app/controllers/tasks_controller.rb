@@ -24,6 +24,7 @@ class TasksController < ApplicationController
     end
 
     def update
+        byebug
         task = Task.find(params[:id])
         if task.update(task_params)
             render json: serialize(task)
@@ -44,6 +45,6 @@ class TasksController < ApplicationController
     end
 
     def task_params
-        params.require(:task).permit(:title, :project_id, :cue, :actual_time, :display_time, :position_at_time, :steps, :tags)
+        params.require(:task).permit(:title, :project_id, :cue, :actual_time, :display_time, :position_at_time, :complete_steps, :incomplete_steps, :tags)
     end
 end
