@@ -24,7 +24,6 @@ class TasksController < ApplicationController
     end
 
     def update
-        byebug
         task = Task.find(params[:id])
         if task.update(task_params)
             render json: serialize(task)
