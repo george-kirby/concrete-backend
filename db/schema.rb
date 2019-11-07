@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_132433) do
+ActiveRecord::Schema.define(version: 2019_11_07_155204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 2019_10_30_132433) do
     t.datetime "actual_time"
     t.integer "position_at_time", default: 1
     t.string "tags", default: [], array: true
-    t.string "steps", default: [], array: true
+    t.string "incomplete_steps", default: [], array: true
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "complete_steps", default: [], array: true
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
