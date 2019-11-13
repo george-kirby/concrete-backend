@@ -24,9 +24,12 @@ class TasksController < ApplicationController
     def update
         # byebug
         task = Task.find(params[:id])
+        old_actual_time = task.actual_time
         task.update(task_params)
         if task.valid?
-            last_position_at_time(task)
+            if old_actual_time != task.actual_time
+                last_position_at_time(task)
+            end
             render json: serialize(task)
         else
             render json: task.errors.full_messages
