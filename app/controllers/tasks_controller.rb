@@ -11,7 +11,6 @@ class TasksController < ApplicationController
     end
 
     def create
-        # byebug
         task = Task.create(task_params)
         if task.valid?
             last_position_at_time(task)
@@ -22,7 +21,6 @@ class TasksController < ApplicationController
     end
 
     def update
-        # byebug
         task = Task.find(params[:id])
         old_actual_time = task.actual_time
         task.update(task_params)
