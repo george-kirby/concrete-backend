@@ -1,24 +1,17 @@
-# README
+This repository is a backend, created to handle data for the frontend. Go to github.com/george-kirby/concrete-frontend for the full README about the app. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Concrete
 
-Things you may want to cover:
+Concrete is a task-management app which guides the user to define their tasks vividly, rather than vaguely, making follow-through more likely. 
 
-* Ruby version
+On task creation, the user enters a date, time, cue and precise, concrete steps. 
 
-* System dependencies
+## Site
 
-* Configuration
+concrete-frontend.herokuapp.com/
 
-* Database creation
+(You don't have to enter a real email address.)
 
-* Database initialization
+## Demo
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![demo gif](./demo/concreteMinimalDemo.gif)
