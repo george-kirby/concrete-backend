@@ -1,4 +1,4 @@
-This repository is a backend, created to handle data for the frontend. Go to github.com/george-kirby/concrete-frontend for the full README about the app. 
+This repository is a backend, created to handle data for the frontend. Go to https://github.com/george-kirby/concrete-frontend for the full README about the app. 
 
 # Concrete
 
@@ -8,7 +8,7 @@ On task creation, the user enters a date, time, cue and precise, concrete steps.
 
 ## Site
 
-concrete-frontend.herokuapp.com/
+http://concrete-frontend.herokuapp.com
 
 (You don't have to enter a real email address.)
 
