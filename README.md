@@ -1,4 +1,4 @@
-This repository is a backend, created to handle data for the frontend. Go to https://github.com/george-kirby/concrete-frontend for the full README about the app. 
+This repository is a backend, created to handle data for the frontend. Go to https://github.com/george-kirby/concrete-frontend for the app's full README. 
 
 # Concrete
 
